@@ -18,5 +18,12 @@ class LoginPageTest extends BaseTest {
         assertTrue(loginPage.isErrorMessageSameAsDisplayed("Epic sadface: Username and password do not match any user in this service"));
     }
 
+    @Test
+    void loginWithValidCredentialsThenLogout(){
+        loginPage.login("standard_user", "secret_sauce");
+        loginPage.logout();
+        assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package com.codecool.Test;
 
+import com.codecool.Page.CartPage;
 import com.codecool.Page.LoginPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +16,7 @@ public class BaseTest {
     protected WebDriver driver;
     protected FluentWait<WebDriver> wait;
     protected LoginPage loginPage;
+    protected CartPage cartPage;
 
     @BeforeEach
     public void setup() {
@@ -26,6 +28,7 @@ public class BaseTest {
                 .pollingEvery(Duration.ofSeconds(1))
                 .ignoring(NoSuchElementException.class);
         loginPage = new LoginPage(driver, wait);
+        cartPage = new CartPage(driver, wait);
         driver.manage().window().maximize();
         driver.get("https://www.saucedemo.com/");
     }

@@ -1,5 +1,6 @@
 package com.codecool.Page;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +18,10 @@ public class LoginPage extends BasePage{
     private WebElement errorMessage;
     @FindBy(id = "login-button")
     private WebElement loginButton;
+    @FindBy(xpath = "//button[text()='Open Menu']")
+    private WebElement openHamburgerMenuButton;
+    @FindBy(className = "shopping_cart_link")
+    private WebElement shoppingCartButton;
 
     public LoginPage(WebDriver driver, FluentWait<WebDriver> wait) {
         super(driver, wait);
@@ -31,6 +36,15 @@ public class LoginPage extends BasePage{
 
     public boolean isErrorMessageSameAsDisplayed(String message) {
         return errorMessage.getText().equals(message);
+    }
+
+    public void logout(){
+        wait.until(ExpectedConditions.visibilityOf(openHamburgerMenuButton)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='Logout']"))).click();
+    }
+
+    public void clickShoppingCartButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(shoppingCartButton)).click();
     }
 
 }
