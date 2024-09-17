@@ -14,4 +14,10 @@ public class InventoryPageTest extends BaseTest {
         InventoryPage inventoryPage = loginPage.login("standard_user", "secret_sauce");
         assertFalse(inventoryPage.getItems().isEmpty());
     }
+
+    @Test
+    public void logOut(){
+        InventoryPage inventoryPage = loginPage.login("standard_user", "secret_sauce");
+        inventoryPage.logOut();
+    }
 }
