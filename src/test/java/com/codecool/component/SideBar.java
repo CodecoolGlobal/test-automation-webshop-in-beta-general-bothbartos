@@ -1,26 +1,26 @@
 package com.codecool.component;
 
-import com.codecool.Page.LoginPage;
+import com.codecool.Page.InventoryPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class HamburgerMenu extends BaseComponent{
+public class SideBar extends BaseComponent{
 
     private final WebElement logOutLink;
     private final WebElement allItemsLink;
 
-    public HamburgerMenu(WebElement root) {
+    public SideBar(WebElement root) {
         super(root);
         logOutLink = root.findElement(By.id("logout_sidebar_link"));
         allItemsLink = root.findElement(By.id("inventory_sidebar_link"));
     }
 
 
-    private void logOut() {
+    public void logOut() {
         logOutLink.click();
     }
 
-    private void allItems() {
+    public void allItems() {
         allItemsLink.click();
     }
 }

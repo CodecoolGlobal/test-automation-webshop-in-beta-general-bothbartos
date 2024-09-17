@@ -1,5 +1,6 @@
 package com.codecool.Page;
 
+import com.codecool.component.SideBar;
 import com.codecool.component.Item;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -49,8 +50,16 @@ public class InventoryPage extends BasePage {
                 .orElseThrow(() -> new NoSuchElementException("No item found matching the provided name"));
     }
 
-    public void Menu(){
+    public SideBar menu(){
          menuBtn.click();
+         return new SideBar(driver.findElement(By.id("menu_button_container")));
+    }
+
+
+    public LoginPage logOut(){
+        SideBar sideBar = menu();
+        sideBar.logOut();
+        return new LoginPage(driver, wait);
     }
 
 
