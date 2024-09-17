@@ -1,6 +1,7 @@
 package com.codecool.Page;
 
-import components.Item;
+import com.codecool.component.Item;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,7 +20,7 @@ public class InventoryPage extends BasePage {
     @FindBy(xpath = "//*[@data-test='shopping-cart-link']")
     private WebElement cart;
 
-    @FindBy(xpath = "//*[@data-test='inventory_item']")
+    @FindBy(xpath = "//*[@data-test='inventory-item']")
     private List<WebElement> items;
 
     public InventoryPage(WebDriver driver, FluentWait<WebDriver> fluentWait) {
@@ -28,6 +29,7 @@ public class InventoryPage extends BasePage {
     }
 
     public List<Item> getItems() {
+        System.out.println(items);
         return items.stream()
                 .map(Item::new)
                 .toList();
@@ -35,11 +37,18 @@ public class InventoryPage extends BasePage {
 
     public Item getItem(Predicate<Item> predicate) {
         return getItems().stream()
-                .filter(predicate) // Filter by product name or price
+                .filter(predicate)
                 .findFirst()
                 .orElseThrow();
-
     }
+
+    public Item getItem(String name) {
+        return getItems().stream()
+                .filter(item -> item.getName().equals(name))
+                .findFirst()
+                .orElseThrow();
+    }
+
 
 
 }

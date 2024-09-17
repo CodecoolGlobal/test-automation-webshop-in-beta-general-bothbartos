@@ -1,4 +1,4 @@
-package components;
+package com.codecool.component;
 
 import org.openqa.selenium.WebElement;
 
