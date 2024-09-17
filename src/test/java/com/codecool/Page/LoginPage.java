@@ -28,10 +28,11 @@ public class LoginPage extends BasePage{
         PageFactory.initElements(driver, this);
     }
 
-    public void login(String username, String password) {
+    public InventoryPage login(String username, String password) {
         wait.until(ExpectedConditions.visibilityOf(usernameField)).sendKeys(username);
         wait.until(ExpectedConditions.visibilityOf(passwordField)).sendKeys(password);
         wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
+        return new InventoryPage(driver, wait);
     }
 
     public boolean isErrorMessageSameAsDisplayed(String message) {
