@@ -2,6 +2,7 @@ package com.codecool.Page;
 
 import com.codecool.component.Item;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,24 +30,23 @@ public class InventoryPage extends BasePage {
     }
 
     public List<Item> getItems() {
-        System.out.println(items);
         return items.stream()
                 .map(Item::new)
                 .toList();
     }
 
-    public Item getItem(Predicate<Item> predicate) {
+    public Item getItem(Predicate<Item> predicate) throws NoSuchElementException {
         return getItems().stream()
                 .filter(predicate)
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(() -> new NoSuchElementException("No item found matching the provided predicate"));
     }
 
-    public Item getItem(String name) {
+    public Item getItem(String name) throws NoSuchElementException {
         return getItems().stream()
                 .filter(item -> item.getName().equals(name))
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(() -> new NoSuchElementException("No item found matching the provided name"));
     }
 
 

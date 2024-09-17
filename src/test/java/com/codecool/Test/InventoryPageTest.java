@@ -10,9 +10,8 @@ public class InventoryPageTest extends BaseTest {
 
 
     @Test
-    public void getItems() {
+    public void userCanSeeItems() {
         InventoryPage inventoryPage = loginPage.login("standard_user", "secret_sauce");
-        inventoryPage.getItems();
         assertFalse(inventoryPage.getItems().isEmpty());
     }
 }
