@@ -14,4 +14,18 @@ public class InventoryPageTest extends BaseTest {
         InventoryPage inventoryPage = loginPage.login("standard_user", "secret_sauce");
         assertFalse(inventoryPage.getItems().isEmpty());
     }
+
+    @Test
+    public void sortPageZToATest(){
+        InventoryPage inventoryPage = loginPage.login("standard_user", "secret_sauce");
+        inventoryPage.sortPageBy("za");
+        assertFalse(inventoryPage.isPageSortedAToZ());
+    }
+
+    @Test
+    public void sortPageLowToHigh(){
+        InventoryPage inventoryPage = loginPage.login("standard_user", "secret_sauce");
+        inventoryPage.sortPageBy("lohi");
+        assertTrue(inventoryPage.isPageSortedLowToHighPrice());
+    }
 }
