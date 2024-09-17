@@ -2,7 +2,9 @@ package com.codecool.Test;
 
 import com.codecool.Page.InventoryPage;
 
+import com.codecool.Page.LoginPage;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,7 +19,7 @@ public class InventoryPageTest extends BaseTest {
 
     @Test
     public void logOut(){
-        InventoryPage inventoryPage = loginPage.login("standard_user", "secret_sauce");
-        inventoryPage.logOut();
+        loginPage.login("standard_user", "secret_sauce").logOut();
+        assertEquals(driver.findElement(By.id("login-button")).getAttribute("value"), "Login");
     }
 }
