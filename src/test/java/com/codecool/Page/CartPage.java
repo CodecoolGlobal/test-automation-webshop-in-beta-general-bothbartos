@@ -1,11 +1,15 @@
 package com.codecool.Page;
 
+import com.codecool.component.CartItem;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+
+import java.util.List;
 
 public class CartPage extends BasePage{
 
@@ -28,6 +32,11 @@ public class CartPage extends BasePage{
 
     @FindBy(id = "finish")
     private WebElement finishButton;
+
+    @FindBy(className = "cart_item")
+    private List<WebElement> cartItems;
+    @FindBy(className = "summary_subtotal_label")
+    private WebElement subtotalLabel;
 
     @FindBy(xpath = "//*[@id=\"checkout_complete_container\"]/h2")
     private WebElement checkoutCompleteMessage;
@@ -58,5 +67,31 @@ public class CartPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(finishButton)).click();
     }
 
+    public List<CartItem> getCartItems() {
+        return cartItems.stream()
+                .map(CartItem::new)
+                .toList();
+    }
 
+    public CartItem getCartItem(String itemName) {
+        return getCartItems().stream()
+                .filter(cartItem -> cartItem.getItemName().equals(itemName))
+                .findFirst()
+                .orElseThrow(() -> new NoSuchElementException("No item found matching the provided name"));
+    }
+
+    public double calculateTotalPrice() {
+        return getCartItems().stream().mapToDouble(CartItem::getItemPrice).sum();
+    }
+
+    public double pageCalculatedTotalPrice() {
+        return Double.parseDouble(wait.until(ExpectedConditions.visibilityOf(subtotalLabel))
+                .getText().replaceAll("[a-zA-Z$:]", ""));
+    }
+
+    public boolean isTotalPriceSame(){
+        double totalPrice = calculateTotalPrice();
+        double calculatedTotalPrice = pageCalculatedTotalPrice();
+        return totalPrice == calculatedTotalPrice;
+    }
 }
