@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.util.List;
@@ -58,6 +59,7 @@ public class InventoryPage extends BasePage {
 
     public LoginPage logOut(){
         SideBar sideBar = menu();
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("logout_sidebar_link"))));
         sideBar.logOut();
         return new LoginPage(driver, wait);
     }
