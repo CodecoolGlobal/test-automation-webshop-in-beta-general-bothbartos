@@ -29,7 +29,6 @@ public class InventoryPage extends BasePage {
     }
 
     public List<Item> getItems() {
-        System.out.println(items);
         return items.stream()
                 .map(Item::new)
                 .toList();
