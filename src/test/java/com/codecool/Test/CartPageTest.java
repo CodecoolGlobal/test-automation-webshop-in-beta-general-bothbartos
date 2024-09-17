@@ -11,10 +11,16 @@ class CartPageTest extends BaseTest {
         loginPage.login("standard_user", "secret_sauce");
         loginPage.clickShoppingCartButton();
         cartPage.fillOutShippingForm("asd","asd","asd");
+        cartPage.clickFinishButton();
         assertTrue(cartPage.isCheckoutCompleteMessageDisplayed());
     }
 
     @Test
-    void checkoutNoItemsThen
+    void checkoutNoItemsThenLeaveFormEmptyTest(){
+        loginPage.login("standard_user", "secret_sauce");
+        loginPage.clickShoppingCartButton();
+        cartPage.fillOutShippingForm("","","");
+        assertTrue(cartPage.isErrorMessageSameAsDisplayed("Error: First Name is required"));
+    }
 
 }

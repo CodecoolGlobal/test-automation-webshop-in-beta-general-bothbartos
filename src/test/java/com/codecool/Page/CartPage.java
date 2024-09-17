@@ -44,11 +44,18 @@ public class CartPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(lastNameField)).sendKeys(lastName);
         wait.until(ExpectedConditions.visibilityOf(postalCodeField)).sendKeys(postalCode);
         wait.until(ExpectedConditions.visibilityOf(continueButton)).click();
-        wait.until(ExpectedConditions.visibilityOf(finishButton)).click();
     }
 
     public boolean isCheckoutCompleteMessageDisplayed() {
         return checkoutCompleteMessage.isDisplayed();
+    }
+
+    public boolean isErrorMessageSameAsDisplayed(String errorMessage) {
+        return wait.until(ExpectedConditions.visibilityOf(errorMessageField)).getText().equals(errorMessage);
+    }
+
+    public void clickFinishButton() {
+        wait.until(ExpectedConditions.visibilityOf(finishButton)).click();
     }
 
 
