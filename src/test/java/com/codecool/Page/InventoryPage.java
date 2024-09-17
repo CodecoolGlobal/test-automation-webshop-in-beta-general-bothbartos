@@ -49,6 +49,10 @@ public class InventoryPage extends BasePage {
                 .orElseThrow(() -> new NoSuchElementException("No item found matching the provided name"));
     }
 
+    public void Menu(){
+         menuBtn.click();
+    }
+
 
 
 }
