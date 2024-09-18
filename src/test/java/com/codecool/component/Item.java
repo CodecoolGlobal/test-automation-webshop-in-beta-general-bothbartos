@@ -23,10 +23,11 @@ public class Item extends BaseComponent {
     }
 
     public double getPrice() {
-        return Double.parseDouble(itemPrice.getText());
+        return Double.parseDouble(itemPrice.getText().replaceAll("\\$", ""));
     }
 
     public void addToCart() {
         addToCart.click();
     }
+
 }
