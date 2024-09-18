@@ -1,12 +1,10 @@
 package com.codecool.Test;
 
+import com.codecool.Page.CartPage;
 import com.codecool.Page.InventoryPage;
-
-import com.codecool.Page.LoginPage;
-import org.junit.jupiter.api.Test;
+import com.codecool.component.Item;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.openqa.selenium.By;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,7 +20,7 @@ public class InventoryPageTest extends BaseTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/usernames.csv", numLinesToSkip = 1)
-    public void sortPageZToATest(String username){
+    public void sortPageZToATest(String username) {
         InventoryPage inventoryPage = loginPage.login(username, "secret_sauce");
         inventoryPage.sortPageBy("za");
         assertFalse(inventoryPage.isPageSortedAToZ());
@@ -30,9 +28,24 @@ public class InventoryPageTest extends BaseTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/usernames.csv", numLinesToSkip = 1)
-    public void sortPageLowToHigh(String username){
+    public void sortPageLowToHigh(String username) {
         InventoryPage inventoryPage = loginPage.login(username, "secret_sauce");
         inventoryPage.sortPageBy("lohi");
         assertTrue(inventoryPage.isPageSortedLowToHighPrice());
+    }
+
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/usernames.csv", numLinesToSkip = 1)
+    public void isItemAddedToCart() {
+        InventoryPage inventoryPage = loginPage.login("standard_user", "secret_sauce");
+        Item item = inventoryPage.getItem("Sauce Labs Backpack");
+        item.clickButton();
+        assertEquals(1, inventoryPage.getBadgeCounter());
+        item = inventoryPage.getItem("Sauce Labs Backpack");
+        assertEquals("Remove", item.getButtonText());
+        CartPage cartPage = inventoryPage.clickShoppingCartButton();
+        assertEquals(1, cartPage.getCartItems().size());
+
     }
 }
