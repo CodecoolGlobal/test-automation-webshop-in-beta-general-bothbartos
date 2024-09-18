@@ -41,3 +41,6 @@ jobs:
 
       - name: Run Tests
         run: mvn test
+
+      - name: Run Tests with debug
+        run: mvn -X test
