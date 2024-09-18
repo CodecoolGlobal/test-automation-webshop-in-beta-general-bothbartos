@@ -35,7 +35,8 @@ public class Item extends BaseComponent {
         return button.getText();
     }
 
-    public void addToCart(){
+    public double addToCart(){
         button.click();
+        return this.getPrice();
     }
 }

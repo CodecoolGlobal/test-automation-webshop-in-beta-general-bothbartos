@@ -89,9 +89,8 @@ public class CartPage extends BasePage{
                 .getText().replaceAll("[a-zA-Z$:]", ""));
     }
 
-    public boolean isTotalPriceSame(){
-        double totalPrice = calculateTotalPrice();
+    public boolean isTotalPriceSame(double expectedTotalPrice){
         double calculatedTotalPrice = pageCalculatedTotalPrice();
-        return totalPrice == calculatedTotalPrice;
+        return expectedTotalPrice == calculatedTotalPrice;
     }
 }

@@ -31,12 +31,13 @@ class CartPageTest extends BaseTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/usernames.csv", numLinesToSkip = 1)
     void checkoutWithOneItemTest(String username){
+        double totalPrice = 0;
         loginPage.login(username, "secret_sauce");
         Item cartItem = inventoryPage.getItem("Sauce Labs Backpack");
-        cartItem.addToCart();
+        totalPrice += cartItem.addToCart();
         inventoryPage.clickShoppingCartButton();
         cartPage.fillOutShippingForm("Pista","Lakatos","1234, Valahol, Kossuth u. 69.");
-        assertTrue(cartPage.isTotalPriceSame());
+        assertTrue(cartPage.isTotalPriceSame(totalPrice));
         cartPage.clickFinishButton();
         assertTrue(cartPage.isCheckoutCompleteMessageDisplayed());
     }
@@ -44,14 +45,15 @@ class CartPageTest extends BaseTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/usernames.csv", numLinesToSkip = 1)
     void checkoutWithTwoItemsTest(String username){
+        double totalPrice = 0;
         loginPage.login(username, "secret_sauce");
         Item cartItem = inventoryPage.getItem("Sauce Labs Backpack");
         Item cartItem2 = inventoryPage.getItem("Sauce Labs Bike Light");
-        cartItem.addToCart();
-        cartItem2.addToCart();
+        totalPrice+=cartItem.addToCart();
+        totalPrice+=cartItem2.addToCart();
         inventoryPage.clickShoppingCartButton();
         cartPage.fillOutShippingForm("Pista", "Lakatos","1234, Valahol, Kossuth u. 69.");
-        assertTrue(cartPage.isTotalPriceSame());
+        assertTrue(cartPage.isTotalPriceSame(totalPrice));
         cartPage.clickFinishButton();
         assertTrue(cartPage.isCheckoutCompleteMessageDisplayed());
     }
