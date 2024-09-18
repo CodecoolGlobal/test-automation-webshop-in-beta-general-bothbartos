@@ -1,5 +1,6 @@
 package com.codecool.Page;
 
+import com.codecool.component.SideBar;
 import com.codecool.component.Item;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -10,7 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -26,9 +26,6 @@ public class InventoryPage extends BasePage {
 
     @FindBy(xpath = "//*[@data-test='inventory-item']")
     private List<WebElement> items;
-
-    @FindBy(xpath = "//button[text()='Open Menu']")
-    private WebElement openHamburgerMenuButton;
 
     @FindBy(className = "product_sort_container")
     private WebElement productSortContainer;
@@ -58,13 +55,17 @@ public class InventoryPage extends BasePage {
                 .orElseThrow(() -> new NoSuchElementException("No item found matching the provided name"));
     }
 
-    public void clickShoppingCartButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(cart)).click();
+    public SideBar menu(){
+         menuBtn.click();
+         return new SideBar(driver.findElement(By.id("menu_button_container")));
     }
 
-    public void logout(){
-        wait.until(ExpectedConditions.visibilityOf(openHamburgerMenuButton)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='Logout']"))).click();
+
+    public LoginPage logOut(){
+        SideBar sideBar = menu();
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("logout_sidebar_link"))));
+        sideBar.logOut();
+        return new LoginPage(driver, wait);
     }
 
     public void sortPageBy(String value){
