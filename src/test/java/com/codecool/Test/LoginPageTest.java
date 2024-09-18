@@ -21,7 +21,7 @@ class LoginPageTest extends BaseTest {
     @Test
     void loginWithValidCredentialsThenLogout(){
         loginPage.login("standard_user", "secret_sauce");
-        inventoryPage.logout();
+        inventoryPage.logOut();
         assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
     }
 

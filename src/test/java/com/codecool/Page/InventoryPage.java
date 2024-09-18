@@ -94,7 +94,10 @@ public class InventoryPage extends BasePage {
             }
         }
         return true;
+    }
 
+    public void clickShoppingCartButton(){
+        wait.until(ExpectedConditions.elementToBeClickable(cart));
     }
 
 
