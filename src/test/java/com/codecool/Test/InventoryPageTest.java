@@ -2,7 +2,7 @@ package com.codecool.Test;
 
 import com.codecool.Page.InventoryPage;
 
-import com.codecool.Page.LoginPage;
+import com.codecool.component.Item;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
@@ -35,5 +35,14 @@ public class InventoryPageTest extends BaseTest {
     public void logOut(){
         loginPage.login("standard_user", "secret_sauce").logOut();
         assertEquals(driver.findElement(By.id("login-button")).getAttribute("value"), "Login");
+    }
+
+    @Test
+    public void addItemToCart(){
+        InventoryPage inventoryPage = loginPage.login("standard_user", "secret_sauce");
+        Item item = inventoryPage.getItem("Sauce Labs Backpack");
+        item.clickButton();
+        assertEquals(1, inventoryPage.getBadgeCounter());
+        assertEquals("Remove", item.getButtonText());
     }
 }
