@@ -30,6 +30,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - name: Cleam
+        run: mvn clean
+
       - name: Install dependencies
         run: mvn install
         
