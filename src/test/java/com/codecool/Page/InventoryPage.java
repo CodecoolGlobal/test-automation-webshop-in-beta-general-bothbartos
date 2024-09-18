@@ -101,8 +101,9 @@ public class InventoryPage extends BasePage {
         return true;
     }
 
-    public void clickShoppingCartButton() {
+    public CartPage clickShoppingCartButton() {
         wait.until(ExpectedConditions.elementToBeClickable(cart)).click();
+        return new CartPage(driver, wait);
     }
 
     public void clickButtonOnItem(String itemName) {
