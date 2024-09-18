@@ -1,7 +1,6 @@
 package com.codecool.Test;
 
 import com.codecool.component.Item;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -38,6 +37,7 @@ class CartPageTest extends BaseTest {
         inventoryPage.clickShoppingCartButton();
         cartPage.fillOutShippingForm("Pista","Lakatos","1234, Valahol, Kossuth u. 69.");
         assertTrue(cartPage.isTotalPriceSame(totalPrice));
+        assertTrue(cartPage.isTotalPriceSame());
         cartPage.clickFinishButton();
         assertTrue(cartPage.isCheckoutCompleteMessageDisplayed());
     }
@@ -54,6 +54,7 @@ class CartPageTest extends BaseTest {
         inventoryPage.clickShoppingCartButton();
         cartPage.fillOutShippingForm("Pista", "Lakatos","1234, Valahol, Kossuth u. 69.");
         assertTrue(cartPage.isTotalPriceSame(totalPrice));
+        assertTrue(cartPage.isTotalPriceSame());
         cartPage.clickFinishButton();
         assertTrue(cartPage.isCheckoutCompleteMessageDisplayed());
     }
