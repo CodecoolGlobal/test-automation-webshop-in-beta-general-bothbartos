@@ -1,5 +1,6 @@
 package com.codecool.Page;
 
+import com.codecool.component.SideBar;
 import com.codecool.component.Item;
 import com.codecool.component.SideBar;
 import org.openqa.selenium.By;
@@ -101,7 +102,7 @@ public class InventoryPage extends BasePage {
     }
 
     public void clickShoppingCartButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(cart));
+        wait.until(ExpectedConditions.elementToBeClickable(cart)).click();
     }
 
     public void clickButtonOnItem(String itemName) {
