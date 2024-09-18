@@ -37,7 +37,7 @@ jobs:
         run: mvn clean
 
       - name: Install dependencies
-        run: mvn install
+        run: mvn install -DskipTests
 
       - name: Run Tests
         run: mvn test
