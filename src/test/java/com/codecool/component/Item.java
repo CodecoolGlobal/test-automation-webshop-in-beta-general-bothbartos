@@ -9,13 +9,14 @@ public class Item extends BaseComponent {
 
     private final WebElement itemPrice;
 
-    private final WebElement addToCart;
+    private final WebElement button;
 
     public Item(WebElement root) {
         super(root);
         this.itemName = root.findElement(By.xpath(".//*[@data-test='inventory-item-name']"));
         this.itemPrice = root.findElement(By.xpath(".//*[@data-test='inventory-item-price']"));
-        this.addToCart = root.findElement(By.xpath(".//*[contains(@data-test, 'add-to-cart')]"));
+        this.button = root.findElement(By.xpath(".//following-sibling::div[@class='pricebar']//button"));
+
     }
 
     public String getName() {
@@ -26,9 +27,16 @@ public class Item extends BaseComponent {
         return Double.parseDouble(itemPrice.getText().replaceAll("\\$", ""));
     }
 
-    public double addToCart() {
-        addToCart.click();
-        return this.getPrice();
+    public void clickButton() {
+        button.click();
     }
 
+    public String getButtonText() {
+        return button.getText();
+    }
+
+    public double addToCart(){
+        button.click();
+        return this.getPrice();
+    }
 }
