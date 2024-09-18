@@ -9,11 +9,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.Duration;
 
 public class BaseTest {
@@ -24,10 +21,11 @@ public class BaseTest {
     protected InventoryPage inventoryPage;
 
     @BeforeEach
-    public void setup() throws MalformedURLException {
+    public void setup() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-search-engine-choice-screen");
-        driver = new RemoteWebDriver(new URL("http://localhost:4444/"), options);
+        options.addArguments("--headless");
+        driver = new ChromeDriver(options);
         wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(10))
                 .pollingEvery(Duration.ofSeconds(1))
