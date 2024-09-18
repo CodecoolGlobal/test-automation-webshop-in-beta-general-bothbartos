@@ -97,7 +97,7 @@ public class InventoryPage extends BasePage {
     }
 
     public void clickShoppingCartButton(){
-        wait.until(ExpectedConditions.elementToBeClickable(cart));
+        wait.until(ExpectedConditions.elementToBeClickable(cart)).click();
     }
 
 
