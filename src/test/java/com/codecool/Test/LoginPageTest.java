@@ -23,8 +23,8 @@ class LoginPageTest extends BaseTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/usernames.csv", numLinesToSkip = 1)
-    void loginWithValidCredentialsThenLogout(){
-        loginPage.login("standard_user", "secret_sauce");
+    void loginWithValidCredentialsThenLogout(String username){
+        loginPage.login(username, "secret_sauce");
         inventoryPage.logOut();
         assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
     }
