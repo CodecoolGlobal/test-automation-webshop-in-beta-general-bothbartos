@@ -22,6 +22,9 @@ jobs:
           distribution: 'temurin'
           java-version: '22'
 
+      - uses: browser-actions/setup-chrome@latest
+      - run: chrome --version
+
       - name: Cache Maven packages
         uses: actions/cache@v3
         with:
@@ -29,12 +32,6 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-
-      - name: Install Chrome
-        run: sudo apt-get install -y google-chrome-stable
-
-      - name: Install ChromeDriver
-        run: sudo apt-get install -y chromium-chromedriver
 
       - name: Clean
         run: mvn clean
