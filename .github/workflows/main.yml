@@ -25,6 +25,9 @@ jobs:
       - uses: browser-actions/setup-chrome@latest
       - run: chrome --version
 
+      - uses: browser-actions/setup-chrome@latest
+      - run: chrome --version
+
       - name: Cache Maven packages
         uses: actions/cache@v3
         with:
@@ -37,7 +40,7 @@ jobs:
         run: mvn clean
 
       - name: Install dependencies
-        run: mvn install -B test
+        run: mvn install -DskipTests
 
       - name: Run Tests
         run: mvn test
