@@ -26,8 +26,9 @@ public class Item extends BaseComponent {
         return Double.parseDouble(itemPrice.getText().replaceAll("\\$", ""));
     }
 
-    public void addToCart() {
+    public double addToCart() {
         addToCart.click();
+        return this.getPrice();
     }
 
 }
