@@ -1,4 +1,4 @@
-package com.codecool.ArgumentProvider;
+package com.codecool.ArgumentsProvider;
 
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.provider.Arguments;
@@ -21,9 +21,7 @@ public class LoginAndItemNameProvider implements ArgumentsProvider {
         List<String> usernames = readCsv("/usernames.csv");
         List<String> itemNames = readCsv("/itemNames.csv");
         for (String username : usernames) {
-            for (String itemName : itemNames) {
-                arguments.add(Arguments.of(username, itemName));
-            }
+            arguments.add(Arguments.of(username, itemNames));
         }
         return arguments.stream();
     }

@@ -3,10 +3,12 @@ package com.codecool.Test;
 import com.codecool.Page.CartPage;
 import com.codecool.Page.InventoryPage;
 import com.codecool.component.Item;
-import com.codecool.ArgumentProvider.LoginAndItemNameProvider;
+import com.codecool.ArgumentsProvider.LoginAndItemNameProvider;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.junit.jupiter.params.provider.CsvFileSource;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,15 +54,20 @@ public class InventoryPageTest extends BaseTest {
 
     @ParameterizedTest
     @ArgumentsSource(LoginAndItemNameProvider.class)
-    public void isItemDescriptionSameAsDisplayedTest(String username, String itemName) {
+    public void isItemDescriptionSameAsDisplayedTest(String username, List<String> itemNames) {
         InventoryPage inventoryPage = loginPage.login(username, "secret_sauce");
-        Item item = inventoryPage.getItem(itemName);
-        String inventoryPageDescription = item.getDescription();
-        double inventoryPageItemPrice = item.getPrice();
-        item.openItem();
-        String itemDescription = itemPage.getItemDescription();
-        double itemPrice = itemPage.getPrice();
-        assertEquals(inventoryPageDescription, itemDescription);
-        assertEquals(inventoryPageItemPrice, itemPrice);
+        for(String itemName : itemNames) {
+            Item item = inventoryPage.getItem(itemName);
+            String inventoryPageDescription = item.getDescription();
+            double inventoryPageItemPrice = item.getPrice();
+            item.openItem();
+            String itemDescription = itemPage.getItemDescription();
+            double itemPrice = itemPage.getPrice();
+
+            assertEquals(inventoryPageItemPrice, itemPrice);
+            assertEquals(inventoryPageDescription, itemDescription);
+
+            itemPage.clickBackToProductsButton();
+        }
     }
 }

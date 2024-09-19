@@ -15,6 +15,8 @@ public class ItemPage extends BasePage{
     private WebElement itemPrice;
     @FindBy(xpath = "//*[@data-test='add-to-cart']")
     private WebElement addToCartButton;
+    @FindBy(xpath = "//*[@data-test='back-to-products']")
+    private WebElement backToProductsButton;
 
     public ItemPage(WebDriver driver, FluentWait<WebDriver> wait) {
         super(driver, wait);
@@ -27,5 +29,9 @@ public class ItemPage extends BasePage{
 
     public double getPrice() {
         return Double.parseDouble(itemPrice.getText().replaceAll("\\$", ""));
+    }
+
+    public void clickBackToProductsButton() {
+        backToProductsButton.click();
     }
 }
