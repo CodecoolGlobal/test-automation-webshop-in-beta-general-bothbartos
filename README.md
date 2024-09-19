@@ -26,8 +26,6 @@ their shopping cart, and proceed through a checkout process.
 
 ## Getting Started
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ### Prerequisites
 
 1. **Java Development Kit (JDK) 8 or higher**
