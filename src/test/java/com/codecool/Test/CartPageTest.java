@@ -3,6 +3,10 @@ package com.codecool.Test;
 import com.codecool.component.Item;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.interactions.Actions;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,6 +55,25 @@ class CartPageTest extends BaseTest {
         Item cartItem2 = inventoryPage.getItem("Sauce Labs Bike Light");
         totalPrice+=cartItem.addToCart();
         totalPrice+=cartItem2.addToCart();
+        inventoryPage.clickShoppingCartButton();
+        cartPage.fillOutShippingForm("Pista", "Lakatos","1234, Valahol, Kossuth u. 69.");
+        assertTrue(cartPage.isTotalPriceSame(totalPrice));
+        assertTrue(cartPage.isTotalPriceSame());
+        cartPage.clickFinishButton();
+        assertTrue(cartPage.isCheckoutCompleteMessageDisplayed());
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/usernames.csv", numLinesToSkip = 1)
+    void checkoutWithAllItemsTest(String username){
+        double totalPrice = 0;
+        loginPage.login(username, "secret_sauce");
+        List<Item> itemList = inventoryPage.getItems();
+        for (Item item : itemList) {
+            totalPrice+= item.addToCart();
+        }
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, 0);");
         inventoryPage.clickShoppingCartButton();
         cartPage.fillOutShippingForm("Pista", "Lakatos","1234, Valahol, Kossuth u. 69.");
         assertTrue(cartPage.isTotalPriceSame(totalPrice));
