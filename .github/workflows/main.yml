@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+   
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -21,6 +21,9 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '22'
+          
+      - uses: browser-actions/setup-chrome@latest
+      - run: chrome --version
 
       - uses: browser-actions/setup-chrome@latest
       - run: chrome --version
@@ -41,3 +44,6 @@ jobs:
 
       - name: Run Tests
         run: mvn test
+
+      - name: Run Tests with debug
+        run: mvn -X test
