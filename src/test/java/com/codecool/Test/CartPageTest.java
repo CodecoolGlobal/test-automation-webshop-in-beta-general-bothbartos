@@ -1,6 +1,5 @@
-package com.codecool.Test.Mobile;
+package com.codecool.Test;
 
-import com.codecool.Test.Desktop.BaseTestDesktop;
 import com.codecool.component.Item;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -8,9 +7,9 @@ import org.openqa.selenium.JavascriptExecutor;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-class CartPageTestMobile extends BaseTestMobile {
+class CartPageTest extends BaseTestDesktop {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/usernames.csv", numLinesToSkip = 1)

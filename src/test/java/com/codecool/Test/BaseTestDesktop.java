@@ -1,4 +1,4 @@
-package com.codecool.Test.Desktop;
+package com.codecool.Test;
 
 import com.codecool.Page.CartPage;
 import com.codecool.Page.InventoryPage;
@@ -10,9 +10,12 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.devtools.DevTools;
+import org.openqa.selenium.devtools.v126.emulation.Emulation;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.time.Duration;
+import java.util.Optional;
 
 public class BaseTestDesktop {
     protected WebDriver driver;
@@ -36,6 +39,31 @@ public class BaseTestDesktop {
         cartPage = new CartPage(driver, wait);
         inventoryPage = new InventoryPage(driver, wait);
         itemPage = new ItemPage(driver, wait);
+
+        String deviceMode = System.getProperty("device.mode");
+
+        if ("mobile".equalsIgnoreCase(deviceMode)) {
+            DevTools devTools = ((ChromeDriver) driver).getDevTools();
+            devTools.createSession();
+            devTools.send(Emulation.setDeviceMetricsOverride(
+                    390, // Width
+                    844, // Height
+                    100, // Device scale factor
+                    true, // Mobile
+                    Optional.empty(),
+                    Optional.empty(),
+                    Optional.empty(),
+                    Optional.empty(),
+                    Optional.empty(),
+                    Optional.empty(),
+                    Optional.empty(),
+                    Optional.empty(),
+                    Optional.empty(),
+                    Optional.empty()
+            ));
+        } else {
+            driver.manage().window().maximize();
+        }
         driver.manage().window().maximize();
         driver.get("https://www.saucedemo.com/");
     }
