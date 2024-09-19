@@ -1,13 +1,12 @@
-package com.codecool.Test;
+package com.codecool.Test.Desktop;
 
 import com.codecool.component.Item;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CartPageTest extends BaseTest {
+class CartPageTest extends BaseTestDesktop {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/usernames.csv", numLinesToSkip = 1)

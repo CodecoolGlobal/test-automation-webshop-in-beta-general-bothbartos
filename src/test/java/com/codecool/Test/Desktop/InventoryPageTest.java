@@ -1,4 +1,4 @@
-package com.codecool.Test;
+package com.codecool.Test.Desktop;
 
 import com.codecool.Page.CartPage;
 import com.codecool.Page.InventoryPage;
@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class InventoryPageTest extends BaseTest {
+public class InventoryPageTest extends BaseTestDesktop {
 
 
     @ParameterizedTest

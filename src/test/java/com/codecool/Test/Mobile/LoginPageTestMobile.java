@@ -1,5 +1,6 @@
-package com.codecool.Test;
+package com.codecool.Test.Mobile;
 
+import com.codecool.Test.Desktop.BaseTestDesktop;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -7,7 +8,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class LoginPageTest extends BaseTest {
+class LoginPageTestMobile extends BaseTestDesktop {
     @ParameterizedTest
     @CsvFileSource(resources = "/usernames.csv", numLinesToSkip = 1)
     void loginWithValidCredentialsTest(String username) {

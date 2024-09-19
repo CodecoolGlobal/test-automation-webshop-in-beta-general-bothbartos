@@ -1,4 +1,4 @@
-package com.codecool.Test;
+package com.codecool.Test.Mobile;
 
 import com.codecool.Page.CartPage;
 import com.codecool.Page.InventoryPage;
@@ -9,11 +9,14 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.devtools.DevTools;
+import org.openqa.selenium.devtools.v85.emulation.Emulation;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.time.Duration;
+import java.util.Optional;
 
-public class BaseTest {
+public class BaseTestMobile {
     protected WebDriver driver;
     protected FluentWait<WebDriver> wait;
     protected LoginPage loginPage;
@@ -34,6 +37,22 @@ public class BaseTest {
         cartPage = new CartPage(driver, wait);
         inventoryPage = new InventoryPage(driver, wait);
         driver.manage().window().maximize();
+        DevTools devTools = ((ChromeDriver) driver).getDevTools();
+        devTools.createSession();
+        devTools.send(Emulation.setDeviceMetricsOverride(
+                390,
+                844,
+                100,
+                true,
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty()
+        ));
         driver.get("https://www.saucedemo.com/");
     }
 
@@ -41,7 +60,4 @@ public class BaseTest {
     public void teardown() {
         driver.quit();
     }
-
-
-
 }
