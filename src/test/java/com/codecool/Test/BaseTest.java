@@ -2,6 +2,7 @@ package com.codecool.Test;
 
 import com.codecool.Page.CartPage;
 import com.codecool.Page.InventoryPage;
+import com.codecool.Page.ItemPage;
 import com.codecool.Page.LoginPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,12 +20,13 @@ public class BaseTest {
     protected LoginPage loginPage;
     protected CartPage cartPage;
     protected InventoryPage inventoryPage;
+    protected ItemPage itemPage;
 
     @BeforeEach
     public void setup() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-search-engine-choice-screen");
-        options.addArguments("--headless");
+        //options.addArguments("--headless");
         driver = new ChromeDriver(options);
         wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(10))
@@ -33,6 +35,7 @@ public class BaseTest {
         loginPage = new LoginPage(driver, wait);
         cartPage = new CartPage(driver, wait);
         inventoryPage = new InventoryPage(driver, wait);
+        itemPage = new ItemPage(driver, wait);
         driver.manage().window().maximize();
         driver.get("https://www.saucedemo.com/");
     }

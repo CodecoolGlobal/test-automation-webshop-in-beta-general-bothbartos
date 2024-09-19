@@ -3,7 +3,9 @@ package com.codecool.Test;
 import com.codecool.Page.CartPage;
 import com.codecool.Page.InventoryPage;
 import com.codecool.component.Item;
+import com.codecool.ArgumentProvider.LoginAndItemNameProvider;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,6 +48,19 @@ public class InventoryPageTest extends BaseTest {
         assertEquals("Remove", item.getButtonText());
         CartPage cartPage = inventoryPage.clickShoppingCartButton();
         assertEquals(1, cartPage.getCartItems().size());
+    }
 
+    @ParameterizedTest
+    @ArgumentsSource(LoginAndItemNameProvider.class)
+    public void isItemDescriptionSameAsDisplayedTest(String username, String itemName) {
+        InventoryPage inventoryPage = loginPage.login(username, "secret_sauce");
+        Item item = inventoryPage.getItem(itemName);
+        String inventoryPageDescription = item.getDescription();
+        double inventoryPageItemPrice = item.getPrice();
+        item.openItem();
+        String itemDescription = itemPage.getItemDescription();
+        double itemPrice = itemPage.getPrice();
+        assertEquals(inventoryPageDescription, itemDescription);
+        assertEquals(inventoryPageItemPrice, itemPrice);
     }
 }
