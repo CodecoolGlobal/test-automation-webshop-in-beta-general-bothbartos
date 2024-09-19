@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class LoginPageTestMobile extends BaseTestDesktop {
+class LoginPageTestMobile extends BaseTestMobile {
     @ParameterizedTest
     @CsvFileSource(resources = "/usernames.csv", numLinesToSkip = 1)
     void loginWithValidCredentialsTest(String username) {

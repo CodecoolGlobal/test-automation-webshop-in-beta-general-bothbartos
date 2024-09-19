@@ -4,10 +4,13 @@ import com.codecool.Test.Desktop.BaseTestDesktop;
 import com.codecool.component.Item;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
+import org.openqa.selenium.JavascriptExecutor;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class CartPageTestMobile extends BaseTestDesktop {
+class CartPageTestMobile extends BaseTestMobile {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/usernames.csv", numLinesToSkip = 1)
@@ -38,6 +41,7 @@ class CartPageTestMobile extends BaseTestDesktop {
         inventoryPage.clickShoppingCartButton();
         cartPage.fillOutShippingForm("Pista","Lakatos","1234, Valahol, Kossuth u. 69.");
         assertTrue(cartPage.isTotalPriceSame(totalPrice));
+        assertTrue(cartPage.isTotalPriceSame());
         cartPage.clickFinishButton();
         assertTrue(cartPage.isCheckoutCompleteMessageDisplayed());
     }
@@ -54,6 +58,26 @@ class CartPageTestMobile extends BaseTestDesktop {
         inventoryPage.clickShoppingCartButton();
         cartPage.fillOutShippingForm("Pista", "Lakatos","1234, Valahol, Kossuth u. 69.");
         assertTrue(cartPage.isTotalPriceSame(totalPrice));
+        assertTrue(cartPage.isTotalPriceSame());
+        cartPage.clickFinishButton();
+        assertTrue(cartPage.isCheckoutCompleteMessageDisplayed());
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/usernames.csv", numLinesToSkip = 1)
+    void checkoutWithAllItemsTest(String username){
+        double totalPrice = 0;
+        loginPage.login(username, "secret_sauce");
+        List<Item> itemList = inventoryPage.getItems();
+        for (Item item : itemList) {
+            totalPrice+= item.addToCart();
+        }
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, 0);");
+        inventoryPage.clickShoppingCartButton();
+        cartPage.fillOutShippingForm("Pista", "Lakatos","1234, Valahol, Kossuth u. 69.");
+        assertTrue(cartPage.isTotalPriceSame(totalPrice));
+        assertTrue(cartPage.isTotalPriceSame());
         cartPage.clickFinishButton();
         assertTrue(cartPage.isCheckoutCompleteMessageDisplayed());
     }

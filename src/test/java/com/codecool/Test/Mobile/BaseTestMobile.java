@@ -1,7 +1,9 @@
 package com.codecool.Test.Mobile;
 
+
 import com.codecool.Page.CartPage;
 import com.codecool.Page.InventoryPage;
+import com.codecool.Page.ItemPage;
 import com.codecool.Page.LoginPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v85.emulation.Emulation;
+import org.openqa.selenium.devtools.v126.emulation.Emulation;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.time.Duration;
@@ -22,6 +24,7 @@ public class BaseTestMobile {
     protected LoginPage loginPage;
     protected CartPage cartPage;
     protected InventoryPage inventoryPage;
+    protected ItemPage itemPage;
 
     @BeforeEach
     public void setup() {
@@ -36,6 +39,7 @@ public class BaseTestMobile {
         loginPage = new LoginPage(driver, wait);
         cartPage = new CartPage(driver, wait);
         inventoryPage = new InventoryPage(driver, wait);
+        itemPage = new ItemPage(driver, wait);
         driver.manage().window().maximize();
         DevTools devTools = ((ChromeDriver) driver).getDevTools();
         devTools.createSession();
@@ -44,6 +48,8 @@ public class BaseTestMobile {
                 844,
                 100,
                 true,
+                Optional.empty(),
+                Optional.empty(),
                 Optional.empty(),
                 Optional.empty(),
                 Optional.empty(),
@@ -60,4 +66,5 @@ public class BaseTestMobile {
     public void teardown() {
         driver.quit();
     }
+
 }
