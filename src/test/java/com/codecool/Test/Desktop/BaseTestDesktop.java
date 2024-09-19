@@ -2,6 +2,7 @@ package com.codecool.Test.Desktop;
 
 import com.codecool.Page.CartPage;
 import com.codecool.Page.InventoryPage;
+import com.codecool.Page.ItemPage;
 import com.codecool.Page.LoginPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,6 +20,7 @@ public class BaseTestDesktop {
     protected LoginPage loginPage;
     protected CartPage cartPage;
     protected InventoryPage inventoryPage;
+    protected ItemPage itemPage;
 
     @BeforeEach
     public void setup() {
@@ -33,6 +35,7 @@ public class BaseTestDesktop {
         loginPage = new LoginPage(driver, wait);
         cartPage = new CartPage(driver, wait);
         inventoryPage = new InventoryPage(driver, wait);
+        itemPage = new ItemPage(driver, wait);
         driver.manage().window().maximize();
         driver.get("https://www.saucedemo.com/");
     }

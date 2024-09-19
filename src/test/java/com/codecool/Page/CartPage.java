@@ -93,4 +93,10 @@ public class CartPage extends BasePage{
         double calculatedTotalPrice = pageCalculatedTotalPrice();
         return expectedTotalPrice == calculatedTotalPrice;
     }
+
+    public boolean isTotalPriceSame(){
+        double calculatedTotalPrice = pageCalculatedTotalPrice();
+        double expectedTotalPrice = calculateTotalPrice();
+        return expectedTotalPrice == calculatedTotalPrice;
+    }
 }

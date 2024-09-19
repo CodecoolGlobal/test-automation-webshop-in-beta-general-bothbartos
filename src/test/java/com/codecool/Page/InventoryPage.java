@@ -113,4 +113,8 @@ public class InventoryPage extends BasePage {
     public int getBadgeCounter() {
         return Integer.parseInt(badge.getText());
     }
+
+    public WebElement getCartButton() {
+        return cart;
+    }
 }
