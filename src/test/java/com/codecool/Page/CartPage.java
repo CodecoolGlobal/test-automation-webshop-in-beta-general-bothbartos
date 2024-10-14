@@ -35,6 +35,7 @@ public class CartPage extends BasePage{
 
     @FindBy(className = "cart_item")
     private List<WebElement> cartItems;
+
     @FindBy(className = "summary_subtotal_label")
     private WebElement subtotalLabel;
 
@@ -71,13 +72,6 @@ public class CartPage extends BasePage{
         return cartItems.stream()
                 .map(CartItem::new)
                 .toList();
-    }
-
-    public CartItem getCartItem(String itemName) {
-        return getCartItems().stream()
-                .filter(cartItem -> cartItem.getItemName().equals(itemName))
-                .findFirst()
-                .orElseThrow(() -> new NoSuchElementException("No item found matching the provided name"));
     }
 
     public double calculateTotalPrice() {

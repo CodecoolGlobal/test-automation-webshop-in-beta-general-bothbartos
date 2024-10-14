@@ -30,7 +30,6 @@ public class BaseTestMobile {
     public void setup() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-search-engine-choice-screen");
-        options.addArguments("--headless");
         driver = new ChromeDriver(options);
         wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(10))

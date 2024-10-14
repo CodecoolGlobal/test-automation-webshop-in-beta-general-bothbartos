@@ -2,7 +2,6 @@ package com.codecool.Page;
 
 import com.codecool.component.SideBar;
 import com.codecool.component.Item;
-import com.codecool.component.SideBar;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -44,13 +43,6 @@ public class InventoryPage extends BasePage {
         return items.stream()
                 .map(Item::new)
                 .toList();
-    }
-
-    public Item getItem(Predicate<Item> predicate) throws NoSuchElementException {
-        return getItems().stream()
-                .filter(predicate)
-                .findFirst()
-                .orElseThrow(() -> new NoSuchElementException("No item found matching the provided predicate"));
     }
 
     public Item getItem(String name) throws NoSuchElementException {
@@ -106,15 +98,7 @@ public class InventoryPage extends BasePage {
         return new CartPage(driver, wait);
     }
 
-    public void clickButtonOnItem(String itemName) {
-        getItem(itemName);
-    }
-
     public int getBadgeCounter() {
         return Integer.parseInt(badge.getText());
-    }
-
-    public WebElement getCartButton() {
-        return cart;
     }
 }

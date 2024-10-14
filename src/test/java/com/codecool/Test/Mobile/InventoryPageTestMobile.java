@@ -3,7 +3,6 @@ package com.codecool.Test.Mobile;
 import com.codecool.ArgumentsProvider.LoginAndItemNameProvider;
 import com.codecool.Page.CartPage;
 import com.codecool.Page.InventoryPage;
-import com.codecool.Test.Desktop.BaseTestDesktop;
 import com.codecool.component.Item;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
