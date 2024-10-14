@@ -1,5 +1,4 @@
-package com.codecool.Test.Mobile;
-
+package com.codecool.Test;
 
 import com.codecool.Page.CartPage;
 import com.codecool.Page.InventoryPage;
@@ -18,7 +17,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import java.time.Duration;
 import java.util.Optional;
 
-public class BaseTestMobile {
+public class BaseTestDesktop {
     protected WebDriver driver;
     protected FluentWait<WebDriver> wait;
     protected LoginPage loginPage;
@@ -39,25 +38,32 @@ public class BaseTestMobile {
         cartPage = new CartPage(driver, wait);
         inventoryPage = new InventoryPage(driver, wait);
         itemPage = new ItemPage(driver, wait);
+
+        String deviceMode = System.getProperty("device.mode");
+
+        if ("mobile".equalsIgnoreCase(deviceMode)) {
+            DevTools devTools = ((ChromeDriver) driver).getDevTools();
+            devTools.createSession();
+            devTools.send(Emulation.setDeviceMetricsOverride(
+                    390, // Width
+                    844, // Height
+                    100, // Device scale factor
+                    true, // Mobile
+                    Optional.empty(),
+                    Optional.empty(),
+                    Optional.empty(),
+                    Optional.empty(),
+                    Optional.empty(),
+                    Optional.empty(),
+                    Optional.empty(),
+                    Optional.empty(),
+                    Optional.empty(),
+                    Optional.empty()
+            ));
+        } else {
+            driver.manage().window().maximize();
+        }
         driver.manage().window().maximize();
-        DevTools devTools = ((ChromeDriver) driver).getDevTools();
-        devTools.createSession();
-        devTools.send(Emulation.setDeviceMetricsOverride(
-                390,
-                844,
-                100,
-                true,
-                Optional.empty(),
-                Optional.empty(),
-                Optional.empty(),
-                Optional.empty(),
-                Optional.empty(),
-                Optional.empty(),
-                Optional.empty(),
-                Optional.empty(),
-                Optional.empty(),
-                Optional.empty()
-        ));
         driver.get("https://www.saucedemo.com/");
     }
 

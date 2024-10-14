@@ -1,4 +1,4 @@
-package com.codecool.Test.Desktop;
+package com.codecool.Test;
 
 import com.codecool.component.Item;
 import org.junit.jupiter.params.ParameterizedTest;
