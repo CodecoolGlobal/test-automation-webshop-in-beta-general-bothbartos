@@ -2,6 +2,7 @@ package com.codecool.Test;
 
 import com.codecool.Page.CartPage;
 import com.codecool.Page.InventoryPage;
+import com.codecool.Test.Mobile.BaseTestMobile;
 import com.codecool.component.Item;
 import com.codecool.ArgumentsProvider.LoginAndItemNameProvider;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class InventoryPageTest extends BaseTestDesktop {
+public class InventoryPageTest extends BaseTestMobile {
 
 
     @ParameterizedTest

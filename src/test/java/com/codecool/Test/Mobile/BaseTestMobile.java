@@ -1,4 +1,4 @@
-package com.codecool.Test;
+package com.codecool.Test.Mobile;
 
 import com.codecool.Page.CartPage;
 import com.codecool.Page.InventoryPage;
@@ -11,13 +11,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v126.emulation.Emulation;
+import org.openqa.selenium.devtools.v129.emulation.Emulation;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.time.Duration;
 import java.util.Optional;
 
-public class BaseTestDesktop {
+public class BaseTestMobile {
     protected WebDriver driver;
     protected FluentWait<WebDriver> wait;
     protected LoginPage loginPage;
